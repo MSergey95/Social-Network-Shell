@@ -1,20 +1,21 @@
 import UIKit
+import iOSIntPackage
 import StorageService
+
 class ProfileViewController: UIViewController {
-    private let tableView = UITableView() // Исправлено имя переменной
+    private let tableView = UITableView()
     private var posts: [Post] = []
 
     override func viewDidLoad() {
-           super.viewDidLoad()
-           #if DEBUG
-           self.view.backgroundColor = .red
-           #else
-           self.view.backgroundColor = .green
-           #endif
-           configurePosts()
-           setupTableView()
-       }
-
+        super.viewDidLoad()
+        #if DEBUG
+        self.view.backgroundColor = .red
+        #else
+        self.view.backgroundColor = .green
+        #endif
+        configurePosts()
+        setupTableView()
+    }
 
     private func configurePosts() {
         posts = [
@@ -26,18 +27,17 @@ class ProfileViewController: UIViewController {
     }
 
     private func setupTableView() {
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier) // Исправлено имя переменной
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .lightGray // Исправлено имя переменной
+        tableView.backgroundColor = .lightGray
 
-        // Настройка ProfileTableHeaderView для нулевой секции
         let headerView = ProfileHeaderView()
         headerView.backgroundColor = .lightGray
-        headerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 200) // Установка желаемой высоты
+        headerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 200)
         tableView.tableHeaderView = headerView
 
-        view.addSubview(tableView) // Исправлено имя переменной
+        view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -48,7 +48,6 @@ class ProfileViewController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
@@ -58,19 +57,32 @@ extension ProfileViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell else {
             return UITableViewCell()
         }
+
         let post = posts[indexPath.row]
-        cell.configure(with: post)
+        let filter: ColorFilter
+
+        switch indexPath.row {
+        case 0:
+            filter = .sepia(intensity: 0.8)
+        case 1:
+            filter = .crystallize(radius: 4)
+        case 2:
+            filter = .gaussianBlur(radius: 3)
+        default:
+            filter = .vignette(intensity: 0.5, radius: 0.8)
+        }
+
+        cell.configure(with: post, filter: filter)
         return cell
     }
 }
 
-// MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension // Высота ячейки рассчитывается автоматически
+        return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350 // Предполагаемая высота ячейки
+        return 350
     }
 }

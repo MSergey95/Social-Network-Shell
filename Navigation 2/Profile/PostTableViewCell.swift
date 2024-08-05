@@ -1,14 +1,10 @@
-//
-//  PostTableViewCell.swift
-//  Navigation 2
-//
-//  Created by Сергей Минеев on 4/24/24.
-//
-// PostTableViewCell.swift
 import UIKit
 import StorageService
+import iOSIntPackage
+
 class PostTableViewCell: UITableViewCell {
     static let identifier = "PostTableViewCell"
+    private let imageProcessor = ImageProcessor()
 
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
@@ -61,12 +57,24 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(viewsLabel)
     }
 
-    func configure(with post: Post) {
+    func configure(with post: Post, filter: ColorFilter) {
         authorLabel.text = post.author
         descriptionLabel.text = post.description
         likesLabel.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
-        postImageView.image = UIImage(named: post.image)
+        if let image = UIImage(named: post.image) {
+            applyFilter(to: image, filter: filter) { filteredImage in
+                DispatchQueue.main.async {
+                    self.postImageView.image = filteredImage
+                }
+            }
+        }
+    }
+
+    private func applyFilter(to image: UIImage, filter: ColorFilter, completion: @escaping (UIImage?) -> Void) {
+        imageProcessor.processImage(sourceImage: image, filter: filter) { filteredImage in
+            completion(filteredImage)
+        }
     }
 
     private func applyConstraints() {
