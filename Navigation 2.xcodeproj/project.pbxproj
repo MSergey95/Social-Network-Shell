@@ -29,6 +29,10 @@
 		A5AEF0302C5CC8BB002CAFCA /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5AEF01B2C5CC8BB002CAFCA /* StorageService.framework */; };
 		A5AEF0312C5CC8BB002CAFCA /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5AEF01B2C5CC8BB002CAFCA /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A5AEF03A2C5CC8EE002CAFCA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEF0392C5CC8EE002CAFCA /* Post.swift */; };
+		A5E0E7852C60CB1400FC86CF /*  User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E0E7842C60CB1400FC86CF /*  User.swift */; };
+		A5E0E7872C60CB5200FC86CF /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E0E7862C60CB5200FC86CF /* UserService.swift */; };
+		A5E0E7892C60CB9E00FC86CF /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E0E7882C60CB9E00FC86CF /* CurrentUserService.swift */; };
+		A5E0E78B2C63605900FC86CF /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E0E78A2C63605900FC86CF /* TestUserService.swift */; };
 		FB6156641BAD55476077558D /* Pods_Navigation_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57491D9433BD508A8045FA57 /* Pods_Navigation_2.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +99,10 @@
 		A5AEF0242C5CC8BB002CAFCA /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5AEF02B2C5CC8BB002CAFCA /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
 		A5AEF0392C5CC8EE002CAFCA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		A5E0E7842C60CB1400FC86CF /*  User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " User.swift"; sourceTree = "<group>"; };
+		A5E0E7862C60CB5200FC86CF /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		A5E0E7882C60CB9E00FC86CF /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
+		A5E0E78A2C63605900FC86CF /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		AFE824AE12B10416F6D40457 /* Pods-Navigation 2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation 2.debug.xcconfig"; path = "Target Support Files/Pods-Navigation 2/Pods-Navigation 2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,6 +192,10 @@
 				A5AEF00F2C5CA427002CAFCA /* ProfileViewController.swift */,
 				A5AEF0062C5CA2AA002CAFCA /* LogInViewController.swift */,
 				A5AEF0082C5CA2AB002CAFCA /* UIColorExtension.swift */,
+				A5E0E7842C60CB1400FC86CF /*  User.swift */,
+				A5E0E7862C60CB5200FC86CF /* UserService.swift */,
+				A5E0E7882C60CB9E00FC86CF /* CurrentUserService.swift */,
+				A5E0E78A2C63605900FC86CF /* TestUserService.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -415,9 +427,13 @@
 				A564DD832BAAE12C00D101DB /* ViewController.swift in Sources */,
 				A564DD952BAAE1CB00D101DB /* FeedViewController.swift in Sources */,
 				A564DD7F2BAAE12C00D101DB /* AppDelegate.swift in Sources */,
+				A5E0E7872C60CB5200FC86CF /* UserService.swift in Sources */,
 				A5AEF0112C5CA427002CAFCA /* ProfileViewController.swift in Sources */,
+				A5E0E78B2C63605900FC86CF /* TestUserService.swift in Sources */,
+				A5E0E7892C60CB9E00FC86CF /* CurrentUserService.swift in Sources */,
 				A564DD972BAAE1F100D101DB /* InfoViewController.swift in Sources */,
 				A5AEF00B2C5CA2AB002CAFCA /* LogInViewController.swift in Sources */,
+				A5E0E7852C60CB1400FC86CF /*  User.swift in Sources */,
 				A5AEF0092C5CA2AB002CAFCA /* PostTableViewCell.swift in Sources */,
 				A564DD812BAAE12C00D101DB /* SceneDelegate.swift in Sources */,
 			);

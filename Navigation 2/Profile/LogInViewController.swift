@@ -1,7 +1,6 @@
 import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
-
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let logoImageView: UIImageView = {
@@ -45,16 +44,28 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             button.backgroundColor = UIColor(patternImage: bluePixelImage)
         }
         button.layer.cornerRadius = 10
-
         return button
+    }()
+
+    // Создание сервиса пользователя в зависимости от схемы
+    private let userService: UserService = {
+        #if DEBUG
+        return TestUserService()
+        #else
+        if let avatarImage = UIImage(named: "testAvatar") {
+            return CurrentUserService(user: User(login: "testUser", fullName: "Test User", avatar: avatarImage, status: "Online"))
+        } else {
+            print("Error: Image not found")
+            return CurrentUserService(user: User(login: "testUser", fullName: "Test User", avatar: UIImage(), status: "Online"))
+        }
+        #endif
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupLayout()
         navigationController?.navigationBar.isHidden = true
-        // Добавляем действие для кнопки логина
+
         loginButton.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
 
         emailTextField.delegate = self
@@ -66,6 +77,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         emailTextField.becomeFirstResponder()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -78,14 +90,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     var onLoginSuccess: (() -> Void)?
 
     func login() {
-        // Проверьте данные пользователя и если все в порядке, вызовите замыкание
         onLoginSuccess?()
     }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Скрывает клавиатуру при нажатии кнопки "return" на клавиатуре
         textField.resignFirstResponder()
         return true
     }
+
     private func setupLayout() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -134,24 +146,26 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         ])
     }
 
-//@objc private func logInButtonTapped() {
-     //  self.tabBarController?.selectedIndex = 1
-  //  }
     @objc private func logInButtonTapped() {
-        // Проверка учетных данных пользователя (пропускаем для демонстрации)
-        UserDefaults.standard.set(true, forKey: "isUserLoggedIn") // Сохраняем флаг успешного входа
-        self.tabBarController?.selectedIndex = 1 // Переключаемся на вкладку профиля
+        guard let login = emailTextField.text, !login.isEmpty else {
+            showError("Please enter a login")
+            return
+        }
+
+        if let user = userService.getUser(login: login) {
+            UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+            let profileVC = ProfileViewController()
+            profileVC.user = user
+            navigationController?.pushViewController(profileVC, animated: true)
+        } else {
+            showError("Invalid login")
+        }
     }
 
-    private func findTabBarController() -> UITabBarController? {
-        var responder: UIResponder? = self
-        while responder != nil {
-            if let tabBarController = responder as? UITabBarController {
-                return tabBarController
-            }
-            responder = responder?.next
-        }
-        return nil
+    private func showError(_ message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
     private func setupKeyboardNotifications() {
@@ -167,12 +181,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentInset = contentInset
         scrollView.scrollIndicatorInsets = contentInset
     }
+
     @objc private func keyboardWillHide(notification: NSNotification) {
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
     }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
 }

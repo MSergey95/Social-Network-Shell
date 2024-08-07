@@ -4,24 +4,24 @@ import StorageService
 
 class ProfileHeaderView: UIView, UITextFieldDelegate {
 
-    private lazy var avatarImageView: UIImageView = {
+    var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.layer.cornerRadius = 50
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "catImage")
+        imageView.image = UIImage(named: "testAvatar")
         return imageView
     }()
 
-    private lazy var fullNameLabel: UILabel = {
+    var fullNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Hipster Cat"
+        label.text = "Student of Witcher's academy"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         return label
     }()
 
-    private lazy var statusLabel: UILabel = {
+    var statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Waiting for something..."
         label.textColor = .gray

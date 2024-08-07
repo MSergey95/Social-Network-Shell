@@ -1,10 +1,10 @@
 import UIKit
 import iOSIntPackage
 import StorageService
-
 class ProfileViewController: UIViewController {
     private let tableView = UITableView()
     private var posts: [Post] = []
+    var user: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
         #endif
         configurePosts()
         setupTableView()
+        setupProfileHeader()
     }
 
     private func configurePosts() {
@@ -45,6 +46,13 @@ class ProfileViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
+    }
+
+    private func setupProfileHeader() {
+        guard let headerView = tableView.tableHeaderView as? ProfileHeaderView, let user = user else { return }
+        headerView.fullNameLabel.text = user.fullName
+        headerView.statusLabel.text = user.status
+        headerView.avatarImageView.image = user.avatar
     }
 }
 
