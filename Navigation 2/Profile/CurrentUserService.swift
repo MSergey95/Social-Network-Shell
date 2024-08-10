@@ -17,3 +17,4 @@ class CurrentUserService: UserService {
         return login == currentUser.login ? currentUser : nil
     }
 }
+

@@ -1,5 +1,4 @@
 import UIKit
-import SnapKit
 import StorageService
 
 class ProfileHeaderView: UIView, UITextFieldDelegate {
@@ -7,7 +6,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
-        imageView.layer.cornerRadius = 50
+        imageView.layer.cornerRadius = 64 // Корректное значение радиуса для круглого изображения
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "testAvatar")
         return imageView
@@ -25,7 +24,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         let label = UILabel()
         label.text = "Waiting for something..."
         label.textColor = .gray
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular) // Изменено на 17, чтобы соответствовать идеальному коду
         return label
     }()
 
@@ -37,8 +36,8 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.layer.cornerRadius = 12
+        textField.layer.borderColor = UIColor.gray.cgColor // Изменено на серый цвет, чтобы соответствовать идеальному коду
+        textField.layer.cornerRadius = 8 // Изменено на 8, чтобы соответствовать идеальному коду
         textField.backgroundColor = .white
         textField.clipsToBounds = true // Обрезать фон по границам
         return textField
@@ -48,7 +47,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         let button = UIButton()
         button.setTitle("Set status", for: .normal)
         button.backgroundColor = UIColor.systemBlue
-        button.layer.cornerRadius = 4
+        button.layer.cornerRadius = 8 // Изменено на 8, чтобы соответствовать идеальному коду
         button.addTarget(self, action: #selector(statusButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -73,54 +72,54 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     }
 
     private func updateStatusLabelText() {
-        // Обновление текста статуса текстовым полем
         statusLabel.text = statusTextField.text
         statusTextField.resignFirstResponder() // Скрыть клавиатуру
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Когда пользователь нажимает "Done" на клавиатуре, обновите текст статуса и скройте клавиатуру
         updateStatusLabelText()
         return true
     }
 
     @objc private func statusButtonTapped() {
-        // Implement the status updating logic here
         print(statusTextField.text ?? "No status")
     }
 
     private func setupConstraints() {
-        avatarImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(16)
-            make.width.height.equalTo(100)
-        }
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusTextField.translatesAutoresizingMaskIntoConstraints = false
+        setStatusButton.translatesAutoresizingMaskIntoConstraints = false
 
-        fullNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(27)
-            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
+        NSLayoutConstraint.activate([
+            // Констрейнты для avatarImageView
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 128),
+            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
 
-        statusLabel.snp.makeConstraints { make in
-            make.top.equalTo(fullNameLabel.snp.bottom).offset(8)
-            make.leading.equalTo(fullNameLabel.snp.leading)
-            make.trailing.equalTo(fullNameLabel.snp.trailing)
-        }
+            // Констрейнты для fullNameLabel
+            fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
 
-        statusTextField.snp.makeConstraints { make in
-            make.top.equalTo(statusLabel.snp.bottom).offset(8)
-            make.leading.equalTo(fullNameLabel.snp.leading)
-            make.trailing.equalTo(fullNameLabel.snp.trailing)
-            make.height.equalTo(40)
-        }
+            // Констрейнты для statusLabel
+            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 16),
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
 
-        setStatusButton.snp.makeConstraints { make in
-            make.top.equalTo(statusTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalTo(fullNameLabel.snp.trailing)
-            make.height.equalTo(50)
-            make.bottom.lessThanOrEqualToSuperview().offset(-16)
-        }
+            // Констрейнты для statusTextField
+            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
+            statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusTextField.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+            statusTextField.heightAnchor.constraint(equalToConstant: 32),
+
+            // Констрейнты для setStatusButton
+            setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 48),
+        ])
     }
 }

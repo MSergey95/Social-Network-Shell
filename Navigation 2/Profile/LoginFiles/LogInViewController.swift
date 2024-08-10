@@ -1,6 +1,7 @@
 import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
+
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let logoImageView: UIImageView = {
@@ -47,19 +48,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
 
-    // Создание сервиса пользователя в зависимости от схемы
-    private let userService: UserService = {
-        #if DEBUG
-        return TestUserService()
-        #else
-        if let avatarImage = UIImage(named: "testAvatar") {
-            return CurrentUserService(user: User(login: "testUser", fullName: "Test User", avatar: avatarImage, status: "Online"))
-        } else {
-            print("Error: Image not found")
-            return CurrentUserService(user: User(login: "testUser", fullName: "Test User", avatar: UIImage(), status: "Online"))
-        }
-        #endif
-    }()
+    // Делегат для проверки логина и пароля
+    weak var loginDelegate: LoginViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,19 +68,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         emailTextField.becomeFirstResponder()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     private func removeKeyboardObservers() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    var onLoginSuccess: (() -> Void)?
-
-    func login() {
-        onLoginSuccess?()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -147,21 +127,29 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc private func logInButtonTapped() {
-        guard let login = emailTextField.text, !login.isEmpty else {
-            showError("Please enter a login")
+        guard let login = emailTextField.text, let password = passwordTextField.text, !login.isEmpty, !password.isEmpty else {
+            showError("Please enter both login and password")
             return
         }
 
-        if let user = userService.getUser(login: login) {
-            UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
-            let profileVC = ProfileViewController()
-            profileVC.user = user
-            navigationController?.pushViewController(profileVC, animated: true)
+        print("LogInViewController: Checking delegate before calling check method")
+        if let delegate = loginDelegate {
+            print("LogInViewController: Delegate is set, proceeding with check")
+            if delegate.check(login: login, password: password) {
+                print("LogInViewController: Login and password are correct")
+                UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                // Переходим на профиль сразу после успешной проверки
+                let profileVC = ProfileViewController()
+                navigationController?.pushViewController(profileVC, animated: true)
+            } else {
+                print("LogInViewController: Invalid login or password")
+                showError("Invalid login or password")
+            }
         } else {
-            showError("Invalid login")
+            print("LogInViewController: Delegate not set, cannot proceed with check")
+            showError("Delegate not set")
         }
     }
-
     private func showError(_ message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

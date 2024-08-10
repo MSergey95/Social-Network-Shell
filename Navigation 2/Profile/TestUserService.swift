@@ -5,7 +5,7 @@
 //  Created by Сергей Минеев on 8/7/24.
 //
 
-import Foundation
+/*import Foundation
 import UIKit
 class TestUserService: UserService {
     private let testUser: User
@@ -18,3 +18,4 @@ class TestUserService: UserService {
         return login == testUser.login ? testUser : nil
     }
 }
+*/
