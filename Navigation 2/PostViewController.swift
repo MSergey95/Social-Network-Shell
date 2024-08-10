@@ -1,7 +1,7 @@
 
 
 import UIKit
-
+import StorageService
 class PostViewController: UIViewController {
     var post: Post?
     private let contentLabel = UILabel()
