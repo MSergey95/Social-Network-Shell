@@ -4,13 +4,14 @@
 //
 
 import UIKit
-
 final class ProfileViewController: UIViewController {
-    
+
+    private var viewModel: ProfileViewModel!
+
     static let headerIdent = "header"
     static let photoIdent = "photo"
     static let postIdent = "post"
-    
+
     static var postTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -19,14 +20,16 @@ final class ProfileViewController: UIViewController {
         table.register(PostTableViewCell.self, forCellReuseIdentifier: postIdent)
         return table
     }()
-    
+
     // MARK: - Setup section
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewModel = ProfileViewModel(userProfile: UserProfile(name: "John Doe", status: "Ready to help"))
+
         view.backgroundColor = .systemBackground
-        
+
         view.addSubview(Self.postTableView)
         setupConstraints()
         Self.postTableView.dataSource = self
@@ -34,7 +37,7 @@ final class ProfileViewController: UIViewController {
         Self.postTableView.refreshControl = UIRefreshControl()
         Self.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
     }
-    
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             Self.postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -49,15 +52,13 @@ final class ProfileViewController: UIViewController {
         Self.postTableView.refreshControl?.endRefreshing()
     }
 }
-
 // MARK: - Extensions
-
 extension ProfileViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return postExamples.count
+        case 1: return viewModel.getPostsCount() // Используем метод ViewModel
         default:
             assertionFailure("no registered section")
             return 1
@@ -70,7 +71,7 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 extension ProfileViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -78,7 +79,8 @@ extension ProfileViewController: UITableViewDelegate {
             return cell
         case 1:
             let cell = Self.postTableView.dequeueReusableCell(withIdentifier: Self.postIdent, for: indexPath) as! PostTableViewCell
-            cell.configPostArray(post: postExamples[indexPath.row])
+            let post = viewModel.getPost(at: indexPath.row) // Получаем данные из ViewModel
+            cell.configPostArray(post: post)
             return cell
         default:
             assertionFailure("no registered section")
@@ -89,6 +91,7 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: Self.headerIdent) as! ProfileHeaderView
+        // Передаем данные в headerView из ViewModel, если требуется
         return headerView
     }
 
@@ -105,10 +108,10 @@ extension ProfileViewController: UITableViewDelegate {
             guard let cell = tableView.cellForRow(at: indexPath) else { return }
             if let post = cell as? PostTableViewCell {
                 post.incrementPostViewsCounter()
+                viewModel.incrementViewsCounterForPost(at: indexPath.row) // Обновляем данные в ViewModel
             }
         default:
             assertionFailure("no registered section")
         }
     }
 }
-

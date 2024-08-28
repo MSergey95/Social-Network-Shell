@@ -5,29 +5,35 @@
 
 import UIKit
 
+import UIKit
+
 final class LoginViewController: UIViewController {
-    
+
+    // MARK: - Properties
+
+    weak var coordinator: ProfileCoordinator?
+
     // MARK: Visual content
-    
+
     var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-    
+
     var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     var vkLogo: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "vkLogo")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     var loginStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -40,11 +46,11 @@ final class LoginViewController: UIViewController {
         stack.clipsToBounds = true
         return stack
     }()
-    
+
     var loginButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         if let pixel = UIImage(named: "blue_pixel") {
             button.setBackgroundImage(pixel.image(alpha: 1), for: .normal)
             button.setBackgroundImage(pixel.image(alpha: 0.8), for: .selected)
@@ -59,7 +65,7 @@ final class LoginViewController: UIViewController {
         button.clipsToBounds = true
         return button
     }()
-    
+
     var loginField: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +81,7 @@ final class LoginViewController: UIViewController {
         login.returnKeyType = .done
         return login
     }()
-    
+
     var passwordField: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
@@ -91,30 +97,30 @@ final class LoginViewController: UIViewController {
         password.returnKeyType = .done
         return password
     }()
-    
+
     // MARK: - Setup section
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
-        
+
         setupViews()
     }
-    
+
     private func setupViews() {
         view.addSubview(loginScrollView)
         loginScrollView.addSubview(contentView)
-        
+
         contentView.addSubviews(vkLogo, loginStackView, loginButton)
-        
+
         loginStackView.addArrangedSubview(loginField)
         loginStackView.addArrangedSubview(passwordField)
-        
+
         loginField.delegate = self
         passwordField.delegate = self
-        
+
         setupConstraints()
     }
 
@@ -149,7 +155,7 @@ final class LoginViewController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let nc = NotificationCenter.default
@@ -165,12 +171,11 @@ final class LoginViewController: UIViewController {
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
 
     }
-    
+
     // MARK: - Event handlers
 
     @objc private func touchLoginButton() {
-        let profileVC = ProfileViewController()
-        navigationController?.setViewControllers([profileVC], animated: true)
+        coordinator?.showProfile()
     }
 
     @objc private func keyboardShow(notification: NSNotification) {
@@ -188,7 +193,7 @@ final class LoginViewController: UIViewController {
 // MARK: - Extension
 
 extension LoginViewController: UITextFieldDelegate {
-    
+
     // tap 'done' on the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

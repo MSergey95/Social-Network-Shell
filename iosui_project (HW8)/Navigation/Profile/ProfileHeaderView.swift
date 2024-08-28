@@ -21,16 +21,14 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
 
     // Создаем кастомную кнопку
     private lazy var setStatusButton: CustomButton = {
-        let button = CustomButton(title: "Show status", titleColor: .white, backgroundColor: .systemBlue) {
-            self.statusButtonPressed()
-        }
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = LayoutConstants.cornerRadius
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowRadius = 4
-        button.layer.shadowOpacity = 0.7
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        let button = CustomButton(
+            title: "Show status",
+            titleColor: .white,
+            backgroundColor: .systemBlue,
+            action: { [weak self] in
+                self?.statusButtonPressed()
+            }
+        )
         return button
     }()
 
@@ -91,7 +89,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.layer.cornerRadius = 8
         statusTextField.layer.borderWidth = 1
         statusTextField.layer.borderColor = UIColor.gray.cgColor
-        statusTextField.attributedPlaceholder = NSAttributedString.init(string: "Ready...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        statusTextField.attributedPlaceholder = NSAttributedString(string: "Ready...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         addSubview(statusTextField)
         NSLayoutConstraint.activate([

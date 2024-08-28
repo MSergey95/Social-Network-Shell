@@ -6,6 +6,8 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
+    weak var coordinator: FeedCoordinator?
+
     private var feedModel: FeedModel!
 
     // MARK: - UI Elements
