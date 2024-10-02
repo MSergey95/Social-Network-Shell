@@ -1,19 +1,14 @@
-//
-//  LoginViewController.swift
-//  Navigation
-//
-
 import UIKit
-
-import UIKit
+import FirebaseAuth
 
 final class LoginViewController: UIViewController {
 
     // MARK: - Properties
-
     weak var coordinator: ProfileCoordinator?
 
-    // MARK: Visual content
+    var isSignUpMode = false // Переменная для определения режима регистрации или входа
+
+    // MARK: - Visual content
 
     var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -50,6 +45,7 @@ final class LoginViewController: UIViewController {
     var loginButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = false // Disabled by default until fields are filled
 
         if let pixel = UIImage(named: "blue_pixel") {
             button.setBackgroundImage(pixel.image(alpha: 1), for: .normal)
@@ -60,9 +56,21 @@ final class LoginViewController: UIViewController {
 
         button.setTitle("Login", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(nil, action: #selector(touchLoginButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(touchLoginButton), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.clipsToBounds = true
+        return button
+    }()
+
+    var signUpButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Sign Up", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGreen
+        button.layer.cornerRadius = LayoutConstants.cornerRadius
+        button.clipsToBounds = true
+        button.isHidden = true // Initially hidden until the user fails to log in
         return button
     }()
 
@@ -106,14 +114,20 @@ final class LoginViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
 
+        loginField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged)
+        passwordField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged)
+
         setupViews()
+
+        // Добавляем цель для кнопки Sign Up
+        signUpButton.addTarget(self, action: #selector(touchSignUpButton), for: .touchUpInside)
     }
 
     private func setupViews() {
         view.addSubview(loginScrollView)
         loginScrollView.addSubview(contentView)
 
-        contentView.addSubviews(vkLogo, loginStackView, loginButton)
+        contentView.addSubviews(vkLogo, loginStackView, loginButton, signUpButton)
 
         loginStackView.addArrangedSubview(loginField)
         loginStackView.addArrangedSubview(passwordField)
@@ -153,6 +167,11 @@ final class LoginViewController: UIViewController {
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+
+            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
+            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
+            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
+            signUpButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
@@ -161,7 +180,6 @@ final class LoginViewController: UIViewController {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -169,13 +187,66 @@ final class LoginViewController: UIViewController {
         let nc = NotificationCenter.default
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-
     }
 
     // MARK: - Event handlers
 
     @objc private func touchLoginButton() {
-        coordinator?.showProfile()
+        guard let email = loginField.text, let password = passwordField.text else {
+            showAlert(title: "Error", message: "Please enter both email and password.")
+            return
+        }
+
+        // Проверка на пустые поля
+        if email.isEmpty || password.isEmpty {
+            showAlert(title: "Error", message: "Email or password cannot be empty.")
+            return
+        }
+
+        // Проверяем, существует ли пользователь
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                // Если ошибка, предлагаем регистрацию
+                self.showSignUpOption()
+            } else {
+                // Успешный вход - переход на экран профиля
+                self.coordinator?.showProfile()
+            }
+        }
+    }
+
+    @objc private func touchSignUpButton() {
+        guard let email = loginField.text, let password = passwordField.text else {
+            showAlert(title: "Error", message: "Please enter both email and password.")
+            return
+        }
+
+        // Проверка на пустые поля
+        if email.isEmpty || password.isEmpty {
+            showAlert(title: "Error", message: "Email or password cannot be empty.")
+            return
+        }
+        // Регистрируем нового пользователя
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                self.showAlert(title: "Registration Error", message: error.localizedDescription)
+            } else {
+                // Успешная регистрация - переход на экран профиля
+                self.coordinator?.showProfile()
+            }
+        }
+    }
+
+    // Показать кнопку регистрации, если вход не удался
+    private func showSignUpOption() {
+        self.signUpButton.isHidden = false
+        self.showAlert(title: "No account found", message: "Please sign up to create an account.")
+    }
+
+    @objc private func textFieldsDidChange() {
+        // Включаем кнопку только если оба поля заполнены
+        let isLoginButtonEnabled = !(loginField.text?.isEmpty ?? true) && !(passwordField.text?.isEmpty ?? true)
+        loginButton.isEnabled = isLoginButtonEnabled
     }
 
     @objc private func keyboardShow(notification: NSNotification) {
@@ -188,13 +259,21 @@ final class LoginViewController: UIViewController {
     @objc private func keyboardHide(notification: NSNotification) {
         loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
     }
+
+    // MARK: - Helper Methods
+
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
-// MARK: - Extension
+// MARK: - Extension for UITextFieldDelegate
 
 extension LoginViewController: UITextFieldDelegate {
 
-    // tap 'done' on the keyboard
+    // Tap 'done' on the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
