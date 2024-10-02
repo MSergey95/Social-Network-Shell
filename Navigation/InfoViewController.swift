@@ -62,41 +62,43 @@ final class InfoViewController: UIViewController, UITableViewDataSource {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
-        loadPlanetData()
-    }
-
-    private func loadPlanetData() {
-        let planetURL = URL(string: "https://swapi.dev/api/planets/1/")!
-        NetworkService.requestPlanet(from: planetURL) { [weak self] planet in
-            if let planet = planet {
-                DispatchQueue.main.async {
-                    self?.titleLabel.text = planet.name
-                    self?.orbitalPeriodLabel.text = "Orbital Period: \(planet.orbitalPeriod) days"
-                    self?.loadResidents(residentURLs: planet.residents)
-                }
-            } else {
-                print("Failed to load planet data")
-            }
+        // Использование асинхронной функции для загрузки данных о планете
+        Task {
+            await loadPlanetData()
         }
     }
 
-    private func loadResidents(residentURLs: [String]) {
-        let dispatchGroup = DispatchGroup()
+    private func loadPlanetData() async {
+        let planetURL = URL(string: "https://swapi.dev/api/planets/1/")!
 
+        do {
+            // Использование новой функции для асинхронной загрузки данных о планете
+            let planet: Planet = try await NetworkService.fetchDataAsync(from: planetURL, as: Planet.self)
+            DispatchQueue.main.async {
+                self.titleLabel.text = planet.name
+                self.orbitalPeriodLabel.text = "Orbital Period: \(planet.orbitalPeriod) days"
+            }
+
+            // Загрузка списка жителей
+            await loadResidents(residentURLs: planet.residents)
+        } catch {
+            print("Failed to load planet: \(error)")
+        }
+    }
+
+    private func loadResidents(residentURLs: [String]) async {
         for urlString in residentURLs {
             guard let url = URL(string: urlString) else { continue }
-            dispatchGroup.enter()
 
-            NetworkService.requestResident(from: url) { [weak self] resident in
-                if let resident = resident {
-                    self?.residents.append(resident.name)
+            do {
+                let resident: Resident = try await NetworkService.fetchDataAsync(from: url, as: Resident.self)
+                DispatchQueue.main.async {
+                    self.residents.append(resident.name)
+                    self.tableView.reloadData()
                 }
-                dispatchGroup.leave()
+            } catch {
+                print("Failed to load resident: \(error)")
             }
-        }
-
-        dispatchGroup.notify(queue: .main) {
-            self.tableView.reloadData()
         }
     }
 
