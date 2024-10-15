@@ -1,17 +1,13 @@
-//
-//  DocumentsViewerApp.swift
-//  DocumentsViewer
-//
-//  Created by Сергей Минеев on 10/8/24.
-//
-
 import SwiftUI
 
 @main
 struct DocumentsViewerApp: App {
+    @StateObject var settings = SettingsModel() // Создаем модель настроек
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PasswordView() // Показываем сначала экран для ввода пароля
+                .environmentObject(settings) // Передаем объект настроек всем представлениям
         }
     }
 }
