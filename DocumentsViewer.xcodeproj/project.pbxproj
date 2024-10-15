@@ -11,6 +11,20 @@
 		A5EF89FA2CB4F13000A8C8C2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF89F92CB4F13000A8C8C2 /* ContentView.swift */; };
 		A5EF89FC2CB4F13200A8C8C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5EF89FB2CB4F13200A8C8C2 /* Assets.xcassets */; };
 		A5EF89FF2CB4F13200A8C8C2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5EF89FE2CB4F13200A8C8C2 /* Preview Assets.xcassets */; };
+		A5EF8A062CB5104A00A8C8C2 /* DocumentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A052CB5104A00A8C8C2 /* DocumentItem.swift */; };
+		A5EF8A082CB5109E00A8C8C2 /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A072CB5109E00A8C8C2 /* FileManagerService.swift */; };
+		A5EF8A0A2CB510C100A8C8C2 /* DocumentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A092CB510C100A8C8C2 /* DocumentListView.swift */; };
+		A5EF8A0C2CB513B900A8C8C2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A0B2CB513B900A8C8C2 /* ImagePicker.swift */; };
+		A5EF8A0E2CB5385100A8C8C2 /* TextFieldAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A0D2CB5385100A8C8C2 /* TextFieldAlertView.swift */; };
+		A5EF8A302CBE184000A8C8C2 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A2F2CBE184000A8C8C2 /* DetailsView.swift */; };
+		A5EF8A322CBE1C9A00A8C8C2 /* CreateFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A312CBE1C9A00A8C8C2 /* CreateFolderView.swift */; };
+		A5EF8A372CBE710500A8C8C2 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A362CBE710500A8C8C2 /* KeychainService.swift */; };
+		A5EF8A3A2CBE747400A8C8C2 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A5EF8A392CBE747400A8C8C2 /* KeychainAccess */; };
+		A5EF8A3D2CBE758F00A8C8C2 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A3C2CBE758F00A8C8C2 /* PasswordView.swift */; };
+		A5EF8A3F2CBE75BD00A8C8C2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A3E2CBE75BD00A8C8C2 /* SettingsView.swift */; };
+		A5EF8A412CBE8BB500A8C8C2 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A402CBE8BB500A8C8C2 /* MainTabView.swift */; };
+		A5EF8A452CBEA05E00A8C8C2 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A442CBEA05E00A8C8C2 /* ChangePasswordView.swift */; };
+		A5EF8A472CBEA9A300A8C8C2 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EF8A462CBEA9A300A8C8C2 /* SettingsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +33,19 @@
 		A5EF89F92CB4F13000A8C8C2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A5EF89FB2CB4F13200A8C8C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5EF89FE2CB4F13200A8C8C2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A5EF8A052CB5104A00A8C8C2 /* DocumentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentItem.swift; sourceTree = "<group>"; };
+		A5EF8A072CB5109E00A8C8C2 /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
+		A5EF8A092CB510C100A8C8C2 /* DocumentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListView.swift; sourceTree = "<group>"; };
+		A5EF8A0B2CB513B900A8C8C2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		A5EF8A0D2CB5385100A8C8C2 /* TextFieldAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlertView.swift; sourceTree = "<group>"; };
+		A5EF8A2F2CBE184000A8C8C2 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		A5EF8A312CBE1C9A00A8C8C2 /* CreateFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderView.swift; sourceTree = "<group>"; };
+		A5EF8A362CBE710500A8C8C2 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		A5EF8A3C2CBE758F00A8C8C2 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		A5EF8A3E2CBE75BD00A8C8C2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A5EF8A402CBE8BB500A8C8C2 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		A5EF8A442CBEA05E00A8C8C2 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		A5EF8A462CBEA9A300A8C8C2 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5EF8A3A2CBE747400A8C8C2 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,7 +80,12 @@
 			isa = PBXGroup;
 			children = (
 				A5EF89F72CB4F13000A8C8C2 /* DocumentsViewerApp.swift */,
-				A5EF89F92CB4F13000A8C8C2 /* ContentView.swift */,
+				A5EF8A0B2CB513B900A8C8C2 /* ImagePicker.swift */,
+				A5EF8A462CBEA9A300A8C8C2 /* SettingsModel.swift */,
+				A5EF8A072CB5109E00A8C8C2 /* FileManagerService.swift */,
+				A5EF8A052CB5104A00A8C8C2 /* DocumentItem.swift */,
+				A5EF8A3B2CBE753D00A8C8C2 /* Views */,
+				A5EF8A332CBE70AA00A8C8C2 /* Keychain */,
 				A5EF89FB2CB4F13200A8C8C2 /* Assets.xcassets */,
 				A5EF89FD2CB4F13200A8C8C2 /* Preview Content */,
 			);
@@ -65,6 +98,30 @@
 				A5EF89FE2CB4F13200A8C8C2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A5EF8A332CBE70AA00A8C8C2 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				A5EF8A362CBE710500A8C8C2 /* KeychainService.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		A5EF8A3B2CBE753D00A8C8C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A5EF8A092CB510C100A8C8C2 /* DocumentListView.swift */,
+				A5EF8A402CBE8BB500A8C8C2 /* MainTabView.swift */,
+				A5EF8A312CBE1C9A00A8C8C2 /* CreateFolderView.swift */,
+				A5EF8A2F2CBE184000A8C8C2 /* DetailsView.swift */,
+				A5EF89F92CB4F13000A8C8C2 /* ContentView.swift */,
+				A5EF8A442CBEA05E00A8C8C2 /* ChangePasswordView.swift */,
+				A5EF8A0D2CB5385100A8C8C2 /* TextFieldAlertView.swift */,
+				A5EF8A3C2CBE758F00A8C8C2 /* PasswordView.swift */,
+				A5EF8A3E2CBE75BD00A8C8C2 /* SettingsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +140,9 @@
 			dependencies = (
 			);
 			name = DocumentsViewer;
+			packageProductDependencies = (
+				A5EF8A392CBE747400A8C8C2 /* KeychainAccess */,
+			);
 			productName = DocumentsViewer;
 			productReference = A5EF89F42CB4F13000A8C8C2 /* DocumentsViewer.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +171,9 @@
 				Base,
 			);
 			mainGroup = A5EF89EB2CB4F13000A8C8C2;
+			packageReferences = (
+				A5EF8A382CBE747400A8C8C2 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+			);
 			productRefGroup = A5EF89F52CB4F13000A8C8C2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +201,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5EF89FA2CB4F13000A8C8C2 /* ContentView.swift in Sources */,
+				A5EF8A062CB5104A00A8C8C2 /* DocumentItem.swift in Sources */,
+				A5EF8A0E2CB5385100A8C8C2 /* TextFieldAlertView.swift in Sources */,
+				A5EF8A372CBE710500A8C8C2 /* KeychainService.swift in Sources */,
 				A5EF89F82CB4F13000A8C8C2 /* DocumentsViewerApp.swift in Sources */,
+				A5EF8A0C2CB513B900A8C8C2 /* ImagePicker.swift in Sources */,
+				A5EF8A472CBEA9A300A8C8C2 /* SettingsModel.swift in Sources */,
+				A5EF8A3D2CBE758F00A8C8C2 /* PasswordView.swift in Sources */,
+				A5EF8A452CBEA05E00A8C8C2 /* ChangePasswordView.swift in Sources */,
+				A5EF8A322CBE1C9A00A8C8C2 /* CreateFolderView.swift in Sources */,
+				A5EF8A302CBE184000A8C8C2 /* DetailsView.swift in Sources */,
+				A5EF8A082CB5109E00A8C8C2 /* FileManagerService.swift in Sources */,
+				A5EF8A412CBE8BB500A8C8C2 /* MainTabView.swift in Sources */,
+				A5EF8A0A2CB510C100A8C8C2 /* DocumentListView.swift in Sources */,
+				A5EF8A3F2CBE75BD00A8C8C2 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +418,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A5EF8A382CBE747400A8C8C2 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A5EF8A392CBE747400A8C8C2 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5EF8A382CBE747400A8C8C2 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A5EF89EC2CB4F13000A8C8C2 /* Project object */;
 }
