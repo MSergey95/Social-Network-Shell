@@ -1,17 +1,35 @@
-//
-//  Deep_Thoughts_by_Norris_2App.swift
-//  Deep Thoughts by Norris 2
-//
-//  Created by Сергей Минеев on 10/17/24.
-//
-
 import SwiftUI
+import RealmSwift
 
 @main
-struct Deep_Thoughts_by_Norris_2App: App {
+struct MyApp: App {
+    init() {
+        do {
+            let _ = try Realm()
+            print("Realm успешно инициализирован")
+        } catch {
+            print("Ошибка инициализации Realm: \(error)")
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                RandomQuoteView()
+                    .tabItem {
+                        Label("Random Quote", systemImage: "quote.bubble")
+                    }
+
+                AllQuotesView()
+                    .tabItem {
+                        Label("All Quotes", systemImage: "list.bullet")
+                    }
+
+                CategoriesView()
+                    .tabItem {
+                        Label("Categories", systemImage: "folder")
+                    }
+            }
         }
     }
 }

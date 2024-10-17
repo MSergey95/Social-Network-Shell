@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012C68315678B16C634301DC /* Pods_Deep_Thoughts_by_Norris_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA68D9D2BD59C63F980D16A /* Pods_Deep_Thoughts_by_Norris_2.framework */; };
+		A5499A7C2CC0D312002BD49E /* QuoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5499A7B2CC0D312002BD49E /* QuoteModel.swift */; };
+		A567E22B2CC0DD2E00D43EF0 /* RandomQuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567E22A2CC0DD2E00D43EF0 /* RandomQuoteView.swift */; };
+		A567E22D2CC0DD5D00D43EF0 /* AllQuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567E22C2CC0DD5D00D43EF0 /* AllQuotesView.swift */; };
+		A567E22F2CC0DD7B00D43EF0 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567E22E2CC0DD7B00D43EF0 /* CategoriesView.swift */; };
+		A567E2322CC0E55E00D43EF0 /* QuotesByCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567E2312CC0E55E00D43EF0 /* QuotesByCategoryView.swift */; };
 		A589F5C52CC0D1600023FB85 /* Deep_Thoughts_by_Norris_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589F5C42CC0D1600023FB85 /* Deep_Thoughts_by_Norris_2App.swift */; };
 		A589F5C72CC0D1600023FB85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589F5C62CC0D1600023FB85 /* ContentView.swift */; };
 		A589F5C92CC0D1610023FB85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A589F5C82CC0D1610023FB85 /* Assets.xcassets */; };
@@ -14,11 +20,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4FA68D9D2BD59C63F980D16A /* Pods_Deep_Thoughts_by_Norris_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Deep_Thoughts_by_Norris_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9216ED66ACDE921DFE7FDCC9 /* Pods-Deep Thoughts by Norris 2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deep Thoughts by Norris 2.release.xcconfig"; path = "Target Support Files/Pods-Deep Thoughts by Norris 2/Pods-Deep Thoughts by Norris 2.release.xcconfig"; sourceTree = "<group>"; };
+		A5499A7B2CC0D312002BD49E /* QuoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteModel.swift; sourceTree = "<group>"; };
+		A567E22A2CC0DD2E00D43EF0 /* RandomQuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomQuoteView.swift; sourceTree = "<group>"; };
+		A567E22C2CC0DD5D00D43EF0 /* AllQuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuotesView.swift; sourceTree = "<group>"; };
+		A567E22E2CC0DD7B00D43EF0 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		A567E2312CC0E55E00D43EF0 /* QuotesByCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesByCategoryView.swift; sourceTree = "<group>"; };
 		A589F5C12CC0D1600023FB85 /* Deep Thoughts by Norris 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Deep Thoughts by Norris 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A589F5C42CC0D1600023FB85 /* Deep_Thoughts_by_Norris_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deep_Thoughts_by_Norris_2App.swift; sourceTree = "<group>"; };
 		A589F5C62CC0D1600023FB85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A589F5C82CC0D1610023FB85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A589F5CB2CC0D1610023FB85 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D0AF04C79E4A738022DE7584 /* Pods-Deep Thoughts by Norris 2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deep Thoughts by Norris 2.debug.xcconfig"; path = "Target Support Files/Pods-Deep Thoughts by Norris 2/Pods-Deep Thoughts by Norris 2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,17 +40,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				012C68315678B16C634301DC /* Pods_Deep_Thoughts_by_Norris_2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DF2D2F396551D308CB337F8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4FA68D9D2BD59C63F980D16A /* Pods_Deep_Thoughts_by_Norris_2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		70FB202C51436ADB23B98C6F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D0AF04C79E4A738022DE7584 /* Pods-Deep Thoughts by Norris 2.debug.xcconfig */,
+				9216ED66ACDE921DFE7FDCC9 /* Pods-Deep Thoughts by Norris 2.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A567E2302CC0DDA100D43EF0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A567E22A2CC0DD2E00D43EF0 /* RandomQuoteView.swift */,
+				A567E2312CC0E55E00D43EF0 /* QuotesByCategoryView.swift */,
+				A567E22E2CC0DD7B00D43EF0 /* CategoriesView.swift */,
+				A567E22C2CC0DD5D00D43EF0 /* AllQuotesView.swift */,
+				A589F5C62CC0D1600023FB85 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A589F5B82CC0D1600023FB85 = {
 			isa = PBXGroup;
 			children = (
 				A589F5C32CC0D1600023FB85 /* Deep Thoughts by Norris 2 */,
 				A589F5C22CC0D1600023FB85 /* Products */,
+				70FB202C51436ADB23B98C6F /* Pods */,
+				2DF2D2F396551D308CB337F8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,7 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				A589F5C42CC0D1600023FB85 /* Deep_Thoughts_by_Norris_2App.swift */,
-				A589F5C62CC0D1600023FB85 /* ContentView.swift */,
+				A5499A7B2CC0D312002BD49E /* QuoteModel.swift */,
+				A567E2302CC0DDA100D43EF0 /* Views */,
 				A589F5C82CC0D1610023FB85 /* Assets.xcassets */,
 				A589F5CA2CC0D1610023FB85 /* Preview Content */,
 			);
@@ -74,9 +121,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A589F5CF2CC0D1610023FB85 /* Build configuration list for PBXNativeTarget "Deep Thoughts by Norris 2" */;
 			buildPhases = (
+				D7EE5D99D1E4E1BDF73C7C97 /* [CP] Check Pods Manifest.lock */,
 				A589F5BD2CC0D1600023FB85 /* Sources */,
 				A589F5BE2CC0D1600023FB85 /* Frameworks */,
 				A589F5BF2CC0D1600023FB85 /* Resources */,
+				9FB7029E000363B16F9840F0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,12 +181,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9FB7029E000363B16F9840F0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Deep Thoughts by Norris 2/Pods-Deep Thoughts by Norris 2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Deep Thoughts by Norris 2/Pods-Deep Thoughts by Norris 2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Deep Thoughts by Norris 2/Pods-Deep Thoughts by Norris 2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7EE5D99D1E4E1BDF73C7C97 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Deep Thoughts by Norris 2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A589F5BD2CC0D1600023FB85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A567E2322CC0E55E00D43EF0 /* QuotesByCategoryView.swift in Sources */,
+				A5499A7C2CC0D312002BD49E /* QuoteModel.swift in Sources */,
+				A567E22D2CC0DD5D00D43EF0 /* AllQuotesView.swift in Sources */,
+				A567E22F2CC0DD7B00D43EF0 /* CategoriesView.swift in Sources */,
 				A589F5C72CC0D1600023FB85 /* ContentView.swift in Sources */,
+				A567E22B2CC0DD2E00D43EF0 /* RandomQuoteView.swift in Sources */,
 				A589F5C52CC0D1600023FB85 /* Deep_Thoughts_by_Norris_2App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,7 +278,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -245,7 +341,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -266,6 +362,7 @@
 		};
 		A589F5D02CC0D1610023FB85 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0AF04C79E4A738022DE7584 /* Pods-Deep Thoughts by Norris 2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,6 +391,7 @@
 		};
 		A589F5D12CC0D1610023FB85 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9216ED66ACDE921DFE7FDCC9 /* Pods-Deep Thoughts by Norris 2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
