@@ -1,16 +1,12 @@
-//
-//  PostTableViewCell.swift
-//  Navigation
-//
-
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
-    
+
     private var viewCounter = 0
+    var post: Post?
 
     // MARK: Visual objects
-    
+
     var postAuthor: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -25,6 +21,7 @@ class PostTableViewCell: UITableViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .black
         image.contentMode = .scaleAspectFill
+        image.isUserInteractionEnabled = true // Включаем взаимодействие для изображения
         return image
     }()
 
@@ -45,7 +42,6 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
 
-
     var postViews: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -55,18 +51,23 @@ class PostTableViewCell: UITableViewCell {
     }()
 
     // MARK: - Init section
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubviews(postAuthor, postImage, postDescription, postLikes, postViews)
         setupConstraints()
         self.selectionStyle = .default
+
+        // Добавляем жест двойного нажатия на изображение
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        postImage.addGestureRecognizer(doubleTap)
     }
 
     required init?(coder: NSCoder) {
-        fatalError("lol")
+        fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             postAuthor.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indent),
@@ -92,19 +93,69 @@ class PostTableViewCell: UITableViewCell {
     }
 
     // MARK: - Run loop
-    
+
     func configPostArray(post: Post) {
+        self.post = post
         postAuthor.text = post.author
         postDescription.text = post.description
-        postImage.image = UIImage(named: post.image)
+
+        // Загружаем изображение из ассетов
+        if let image = UIImage(named: post.image) {
+            postImage.image = image
+        } else {
+            postImage.image = UIImage(named: "defaultImage") // Обработка случая, если изображение не найдено
+        }
+
         postLikes.text = "Likes: \(post.likes)"
         viewCounter = post.views
         postViews.text = "Views: \(viewCounter)"
     }
-    
+
     func incrementPostViewsCounter() {
         viewCounter += 1
         postViews.text = "Views: \(viewCounter)"
     }
+
+    // MARK: - Handle double tap
+
+    @objc private func handleDoubleTap() {
+        guard let post = post else { return }
+
+        // Проверяем, есть ли пост уже в избранном
+        let favoritePosts = CoreDataManager.shared.fetchFavoritePosts()
+        if favoritePosts.contains(where: { $0.title == post.author }) {
+            // Отображаем сообщение, если пост уже в избранном
+            let alert = UIAlertController(title: "Ошибка", message: "Этот пост уже в избранных", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            if let parentVC = parentViewController {
+                parentVC.present(alert, animated: true, completion: nil)
+            }
+            print("Этот пост уже добавлен в избранное")
+        } else {
+            // Сохраняем пост в избранное через CoreData, передавая строку имени изображения
+            CoreDataManager.shared.addFavoritePost(id: UUID().uuidString, title: post.author, date: Date(), image: post.image) // Строка для изображения
+            print("Post added to favorites: \(post.author)")
+
+            // Отображаем уведомление об успехе
+            let alert = UIAlertController(title: "Успех", message: "Пост добавлен в избранное", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            if let parentVC = parentViewController {
+                parentVC.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
 }
 
+// MARK: - Extension to get parent view controller
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while let responder = parentResponder {
+            parentResponder = responder.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+}
