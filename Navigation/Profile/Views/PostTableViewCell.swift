@@ -106,16 +106,16 @@ class PostTableViewCell: UITableViewCell {
             postImage.image = UIImage(named: "defaultImage") // Обработка случая, если изображение не найдено
         }
 
-        postLikes.text = "Likes: \(post.likes)"
+        // Локализация лайков и просмотров
+        postLikes.text = LocalizationHelper.likesCountText(count: post.likes)
         viewCounter = post.views
-        postViews.text = "Views: \(viewCounter)"
+        postViews.text = LocalizationHelper.viewsCountText(count: viewCounter)
     }
 
     func incrementPostViewsCounter() {
         viewCounter += 1
-        postViews.text = "Views: \(viewCounter)"
+        postViews.text = LocalizationHelper.viewsCountText(count: viewCounter)
     }
-
     // MARK: - Handle double tap
 
     @objc private func handleDoubleTap() {

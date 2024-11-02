@@ -54,7 +54,8 @@ final class LoginViewController: UIViewController {
             button.setBackgroundImage(pixel.image(alpha: 0.4), for: .disabled)
         }
 
-        button.setTitle("Login", for: .normal)
+        // Локализованное название кнопки входа
+        button.setTitle(LocalizationHelper.loginButtonTitle(), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(touchLoginButton), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
@@ -77,7 +78,7 @@ final class LoginViewController: UIViewController {
     var loginField: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
-        login.placeholder = "Log In"
+        login.placeholder = NSLocalizedString("login_placeholder", comment: "Placeholder for login field")
         login.layer.borderColor = UIColor.lightGray.cgColor
         login.layer.borderWidth = 0.25
         login.leftViewMode = .always
@@ -94,7 +95,7 @@ final class LoginViewController: UIViewController {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
         password.leftViewMode = .always
-        password.placeholder = "Password"
+        password.placeholder = NSLocalizedString("password_placeholder", comment: "Placeholder for password field")
         password.layer.borderColor = UIColor.lightGray.cgColor
         password.layer.borderWidth = 0.25
         password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))

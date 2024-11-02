@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Сергей Минеев on 11/2/24.
+  
+*/
+"login_button_title" = "Вход";
+"welcome_message" = "Добро пожаловать, %@!";
+"views_title" = "Просмотры";
+"photos_title" = "Фотографии";
+"change_password" = "Изменить пароль";
+"like_count" = "%d лайков";
