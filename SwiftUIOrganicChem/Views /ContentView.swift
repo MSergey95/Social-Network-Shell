@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var titleOn = true
+    @AppStorage("titleOn") private var titleOn = true // Замена @State на @AppStorage
 
     var body: some View {
         TabView {
@@ -10,12 +10,11 @@ struct ContentView: View {
                     Label("База знаний", systemImage: "book.closed")
                 }
 
-            HelloView()
+            QuizView()
                 .tabItem {
-                    Label("Hello", systemImage: "face.smiling")
+                    Label("Quiz", systemImage: "questionmark.circle")
                 }
 
-            // Передаем привязку к переменной titleOn в SettingsView
             SettingsView(titleOn: $titleOn)
                 .tabItem {
                     Label("Настройки", systemImage: "gearshape")

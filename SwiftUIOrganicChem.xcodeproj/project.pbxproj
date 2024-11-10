@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A54952852CE0ABE2002E5803 /* QuizQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54952842CE0ABE2002E5803 /* QuizQuestion.swift */; };
 		A58CCAD22CDDDD6700D04C68 /* SwiftUIOrganicChemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAD12CDDDD6700D04C68 /* SwiftUIOrganicChemApp.swift */; };
 		A58CCAD42CDDDD6700D04C68 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAD32CDDDD6700D04C68 /* ContentView.swift */; };
 		A58CCAD62CDDDD6900D04C68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A58CCAD52CDDDD6900D04C68 /* Assets.xcassets */; };
@@ -16,13 +17,14 @@
 		A58CCAE42CDDE55900D04C68 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAE32CDDE55900D04C68 /* InfoView.swift */; };
 		A58CCAE62CDDE5C300D04C68 /* CompoundRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAE52CDDE5C300D04C68 /* CompoundRow.swift */; };
 		A58CCAE82CDDE5D600D04C68 /* CompoundDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAE72CDDE5D600D04C68 /* CompoundDetails.swift */; };
-		A58CCAEB2CDDE83D00D04C68 /* HelloView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAEA2CDDE83D00D04C68 /* HelloView.swift */; };
+		A58CCAEB2CDDE83D00D04C68 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAEA2CDDE83D00D04C68 /* QuizView.swift */; };
 		A58CCAED2CDDE87700D04C68 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAEC2CDDE87700D04C68 /* SettingsView.swift */; };
 		A58CCAF02CDDECEF00D04C68 /* PubChemResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAEF2CDDECEF00D04C68 /* PubChemResponse.swift */; };
 		A58CCAF22CDDED2500D04C68 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAF12CDDED2500D04C68 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A54952842CE0ABE2002E5803 /* QuizQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestion.swift; sourceTree = "<group>"; };
 		A58CCACE2CDDDD6700D04C68 /* SwiftUIOrganicChem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIOrganicChem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58CCAD12CDDDD6700D04C68 /* SwiftUIOrganicChemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIOrganicChemApp.swift; sourceTree = "<group>"; };
 		A58CCAD32CDDDD6700D04C68 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,7 +35,7 @@
 		A58CCAE32CDDE55900D04C68 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		A58CCAE52CDDE5C300D04C68 /* CompoundRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundRow.swift; sourceTree = "<group>"; };
 		A58CCAE72CDDE5D600D04C68 /* CompoundDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundDetails.swift; sourceTree = "<group>"; };
-		A58CCAEA2CDDE83D00D04C68 /* HelloView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloView.swift; sourceTree = "<group>"; };
+		A58CCAEA2CDDE83D00D04C68 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		A58CCAEC2CDDE87700D04C68 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A58CCAEF2CDDECEF00D04C68 /* PubChemResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PubChemResponse.swift; sourceTree = "<group>"; };
 		A58CCAF12CDDED2500D04C68 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				A58CCAD12CDDDD6700D04C68 /* SwiftUIOrganicChemApp.swift */,
+				A54952842CE0ABE2002E5803 /* QuizQuestion.swift */,
 				A58CCAE92CDDE81D00D04C68 /* Views  */,
 				A58CCADF2CDDE3CA00D04C68 /* Post.swift */,
 				A58CCAEE2CDDECDF00D04C68 /* API */,
@@ -95,7 +98,7 @@
 			children = (
 				A58CCAD32CDDDD6700D04C68 /* ContentView.swift */,
 				A58CCAE32CDDE55900D04C68 /* InfoView.swift */,
-				A58CCAEA2CDDE83D00D04C68 /* HelloView.swift */,
+				A58CCAEA2CDDE83D00D04C68 /* QuizView.swift */,
 				A58CCAEC2CDDE87700D04C68 /* SettingsView.swift */,
 			);
 			path = "Views ";
@@ -181,11 +184,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58CCAE02CDDE3CA00D04C68 /* Post.swift in Sources */,
-				A58CCAEB2CDDE83D00D04C68 /* HelloView.swift in Sources */,
+				A58CCAEB2CDDE83D00D04C68 /* QuizView.swift in Sources */,
 				A58CCAE62CDDE5C300D04C68 /* CompoundRow.swift in Sources */,
 				A58CCAED2CDDE87700D04C68 /* SettingsView.swift in Sources */,
 				A58CCAF22CDDED2500D04C68 /* NetworkManager.swift in Sources */,
 				A58CCAE22CDDE41500D04C68 /* DataModel.swift in Sources */,
+				A54952852CE0ABE2002E5803 /* QuizQuestion.swift in Sources */,
 				A58CCAF02CDDECEF00D04C68 /* PubChemResponse.swift in Sources */,
 				A58CCAD42CDDDD6700D04C68 /* ContentView.swift in Sources */,
 				A58CCAE42CDDE55900D04C68 /* InfoView.swift in Sources */,

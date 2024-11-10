@@ -7,6 +7,15 @@ struct InfoView: View {
     @State private var showLocalData = true
     var titleOn: Bool // Управление отображением заголовка
 
+    // Фильтрация локальных данных на основе запроса
+    private var filteredCompounds: [Compound] {
+        if query.isEmpty {
+            return sampleCompounds
+        } else {
+            return sampleCompounds.filter { $0.name.localizedCaseInsensitiveContains(query) }
+        }
+    }
+
     var body: some View {
         NavigationView {
             VStack {
@@ -37,12 +46,13 @@ struct InfoView: View {
                         .padding()
                     }
                 } else if showLocalData || networkManager.compounds.isEmpty {
-                    // Отображение локальной базы данных
-                    List(sampleCompounds) { compound in
+                    // Отображение локальной базы данных с возможностью поиска
+                    List(filteredCompounds) { compound in
                         NavigationLink(destination: CompoundDetails(compound: compound)) {
                             CompoundRow(compound: compound)
                         }
                     }
+                    .searchable(text: $query) // Добавляем строку поиска
                 } else {
                     // Отображение данных из PubChem
                     List(networkManager.compounds) { compound in
