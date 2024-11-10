@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct SwiftUIOrganicChemApp: App {
+    @State private var isAuthorized = false // Управление состоянием авторизации
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isAuthorized {
+                ContentView() // Переход на ContentView после авторизации
+            } else {
+                AuthorizationView(isAuthorized: $isAuthorized) // Передаем состояние в AuthorizationView
+            }
         }
     }
 }

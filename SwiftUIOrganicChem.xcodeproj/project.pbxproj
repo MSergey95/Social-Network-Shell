@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A54952852CE0ABE2002E5803 /* QuizQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54952842CE0ABE2002E5803 /* QuizQuestion.swift */; };
+		A54952882CE0D3B8002E5803 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54952872CE0D3B8002E5803 /* LocalAuthorizationService.swift */; };
+		A549528A2CE0D401002E5803 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54952892CE0D401002E5803 /* AuthorizationView.swift */; };
 		A58CCAD22CDDDD6700D04C68 /* SwiftUIOrganicChemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAD12CDDDD6700D04C68 /* SwiftUIOrganicChemApp.swift */; };
 		A58CCAD42CDDDD6700D04C68 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58CCAD32CDDDD6700D04C68 /* ContentView.swift */; };
 		A58CCAD62CDDDD6900D04C68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A58CCAD52CDDDD6900D04C68 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		A54952842CE0ABE2002E5803 /* QuizQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestion.swift; sourceTree = "<group>"; };
+		A54952872CE0D3B8002E5803 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
+		A54952892CE0D401002E5803 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
 		A58CCACE2CDDDD6700D04C68 /* SwiftUIOrganicChem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIOrganicChem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58CCAD12CDDDD6700D04C68 /* SwiftUIOrganicChemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIOrganicChemApp.swift; sourceTree = "<group>"; };
 		A58CCAD32CDDDD6700D04C68 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A54952862CE0D3A9002E5803 /* FaceID */ = {
+			isa = PBXGroup;
+			children = (
+				A54952872CE0D3B8002E5803 /* LocalAuthorizationService.swift */,
+				A54952892CE0D401002E5803 /* AuthorizationView.swift */,
+			);
+			path = FaceID;
+			sourceTree = "<group>";
+		};
 		A58CCAC52CDDDD6700D04C68 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				A58CCAD32CDDDD6700D04C68 /* ContentView.swift */,
+				A54952862CE0D3A9002E5803 /* FaceID */,
 				A58CCAE32CDDE55900D04C68 /* InfoView.swift */,
 				A58CCAEA2CDDE83D00D04C68 /* QuizView.swift */,
 				A58CCAEC2CDDE87700D04C68 /* SettingsView.swift */,
@@ -193,7 +207,9 @@
 				A58CCAF02CDDECEF00D04C68 /* PubChemResponse.swift in Sources */,
 				A58CCAD42CDDDD6700D04C68 /* ContentView.swift in Sources */,
 				A58CCAE42CDDE55900D04C68 /* InfoView.swift in Sources */,
+				A54952882CE0D3B8002E5803 /* LocalAuthorizationService.swift in Sources */,
 				A58CCAD22CDDDD6700D04C68 /* SwiftUIOrganicChemApp.swift in Sources */,
+				A549528A2CE0D401002E5803 /* AuthorizationView.swift in Sources */,
 				A58CCAE82CDDE5D600D04C68 /* CompoundDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +347,7 @@
 				DEVELOPMENT_TEAM = 7R9CQ3YRWX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID используется для входа в приложение.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -360,6 +377,7 @@
 				DEVELOPMENT_TEAM = 7R9CQ3YRWX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID используется для входа в приложение.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
