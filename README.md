@@ -52,5 +52,3 @@ git clone https://github.com/your-repo/Navigation.git
 
 Contact
 	•	Email: msergey95@gmail.com
-
-This version is clean, well-structured, and optimized for GitHub’s markdown rendering. It improves readability with headings, lists, and code formatting.
