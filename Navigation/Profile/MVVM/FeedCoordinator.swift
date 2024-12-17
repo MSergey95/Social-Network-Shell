@@ -1,11 +1,3 @@
-//
-//  FeedCoordinator.swift
-//  Navigation
-//
-//  Created by Сергей Минеев on 8/16/24.
-//
-
-import Foundation
 import UIKit
 
 final class FeedCoordinator: Coordinator {
@@ -16,8 +8,12 @@ final class FeedCoordinator: Coordinator {
     }
 
     func start() {
-        let feedVC = FeedViewController()
-        feedVC.coordinator = self
+        // Создаём экземпляр пользовательского профиля
+        let userProfile = UserProfile(name: "User", status: "active")
+        let profileViewModel = ProfileViewModel(userProfile: userProfile)
+
+        // Создаём FeedViewController и передаём данные
+        let feedVC = FeedViewController(profileViewModel: profileViewModel)
         navigationController.pushViewController(feedVC, animated: false)
     }
 }
