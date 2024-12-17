@@ -7,7 +7,7 @@
 */
 "login_button_title" = "Вход";
 "welcome_message" = "Добро пожаловать, %@!";
-"views_count" = "%d Просмотров";
+"views_count" = "%d Просмотр";
 "photos_title" = "Фотографии";
 "change_password" = "Изменить пароль";
 "like_count" = "%d лайков";

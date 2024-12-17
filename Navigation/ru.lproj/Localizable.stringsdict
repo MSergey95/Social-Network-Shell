@@ -2,21 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>StringKey</key>
+	<key>NSStringLocalizedFormatKey</key>
 	<dict>
-		<key>Variable</key>
-		<dict>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>one</key>
-			<string></string>
-		</dict>
 		<key>&quot;like_count&quot;</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
-			<string></string>
+			<string>d</string>
 			<key>zero</key>
 			<string>%d лайков</string>
 			<key>one</key>
@@ -35,7 +28,7 @@
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
-			<string></string>
+			<string>d</string>
 			<key>zero</key>
 			<string>&quot;%d просмотров&quot;</string>
 			<key>one</key>

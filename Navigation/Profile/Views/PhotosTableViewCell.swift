@@ -1,27 +1,22 @@
-//
-//  PhotosTableViewCell.swift
-//  Navigation
-//
-
 import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
-    
+
     // MARK: Visual objects
-    
+
     var labelPhotos: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = LocalizationHelper.photosTitle()
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .black
+        label.textColor = .customTextColor // Используем кастомный цвет для текста
         return label
     }()
 
     var arrowImage: UIImageView = {
         let arrow = UIImageView()
         arrow.translatesAutoresizingMaskIntoConstraints = false
-        arrow.image = UIImage(systemName: "arrow.right")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        arrow.image = UIImage(systemName: "arrow.right")?.withTintColor(.customTextColor, renderingMode: .alwaysOriginal) // Используем кастомный цвет
         return arrow
     }()
 
@@ -46,20 +41,22 @@ class PhotosTableViewCell: UITableViewCell {
     }
 
     // MARK: - Init section
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         contentView.addSubviews(labelPhotos, arrowImage, stackViewImage)
-        
+
         setupPreviews()
         setupConstraints()
+
+        contentView.backgroundColor = .customBackground // Устанавливаем кастомный фон для ячейки
     }
 
     required init?(coder: NSCoder) {
-        fatalError("lol")
+        fatalError("init(coder:) has not been implemented")
     }
-    
+
     // get 3 preview images
     private func setupPreviews() {
         for ind in 0...2 {
@@ -71,7 +68,7 @@ class PhotosTableViewCell: UITableViewCell {
             ])
         }
     }
-    
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             labelPhotos.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentTwelve),
@@ -91,4 +88,3 @@ class PhotosTableViewCell: UITableViewCell {
         ])
     }
 }
-

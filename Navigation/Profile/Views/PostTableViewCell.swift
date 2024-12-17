@@ -1,7 +1,9 @@
+import Foundation
 import UIKit
 
-class PostTableViewCell: UITableViewCell {
 
+class PostTableViewCell: UITableViewCell {
+    private var isLiked: Bool = false
     private var viewCounter = 0
     var post: Post?
 
@@ -11,7 +13,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        label.textColor = .customTextColor // Используем кастомный цвет текста
         label.numberOfLines = 2
         return label
     }()
@@ -19,7 +21,7 @@ class PostTableViewCell: UITableViewCell {
     var postImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.backgroundColor = .black
+        image.backgroundColor = .customBackground // Используем кастомный цвет фона
         image.contentMode = .scaleAspectFill
         image.isUserInteractionEnabled = true // Включаем взаимодействие для изображения
         return image
@@ -29,7 +31,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .systemGray
+        label.textColor = .customTextColor // Используем кастомный цвет текста
         label.numberOfLines = 0
         return label
     }()
@@ -38,7 +40,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
-        label.textColor = .black
+        label.textColor = .customTextColor // Используем кастомный цвет текста
         return label
     }()
 
@@ -46,7 +48,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
-        label.textColor = .black
+        label.textColor = .customTextColor // Используем кастомный цвет текста
         return label
     }()
 
@@ -93,7 +95,6 @@ class PostTableViewCell: UITableViewCell {
     }
 
     // MARK: - Run loop
-
     func configPostArray(post: Post) {
         self.post = post
         postAuthor.text = post.author
@@ -107,42 +108,49 @@ class PostTableViewCell: UITableViewCell {
         }
 
         // Локализация лайков и просмотров
-        postLikes.text = LocalizationHelper.likesCountText(count: post.likes)
+        postLikes.text = "like_count".localizedWithLikes(count: post.likes)
         viewCounter = post.views
-        postViews.text = LocalizationHelper.viewsCountText(count: viewCounter)
+        postViews.text = "views_count".localizedWithViews(count: viewCounter)
     }
 
     func incrementPostViewsCounter() {
         viewCounter += 1
-        postViews.text = LocalizationHelper.viewsCountText(count: viewCounter)
+        postViews.text = "views_count".localizedWithViews(count: viewCounter)
     }
     // MARK: - Handle double tap
-
     @objc private func handleDoubleTap() {
         guard let post = post else { return }
 
         // Проверяем, есть ли пост уже в избранном
         let favoritePosts = CoreDataManager.shared.fetchFavoritePosts()
         if favoritePosts.contains(where: { $0.title == post.author }) {
-            // Отображаем сообщение, если пост уже в избранном
-            let alert = UIAlertController(title: "Ошибка", message: "Этот пост уже в избранных", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            if let parentVC = parentViewController {
-                parentVC.present(alert, animated: true, completion: nil)
+            // Если пост уже в избранном, то удаляем его и уменьшаем лайк
+            CoreDataManager.shared.removeFavoritePost(withTitle: post.author)
+            if isLiked {
+                isLiked = false
+                post.likes -= 1
+                postLikes.text = "like_count".localizedWithLikes(count: post.likes)
             }
-            print("Этот пост уже добавлен в избранное")
+            print("Этот пост удален из избранного")
         } else {
-            // Сохраняем пост в избранное через CoreData, передавая строку имени изображения
-            CoreDataManager.shared.addFavoritePost(id: UUID().uuidString, title: post.author, date: Date(), image: post.image) // Строка для изображения
+            // Добавляем пост в избранное и увеличиваем лайк, если еще не было лайка
+            CoreDataManager.shared.addFavoritePost(id: UUID().uuidString, title: post.author, date: Date(), image: post.image)
             print("Post added to favorites: \(post.author)")
 
-            // Отображаем уведомление об успехе
-            let alert = UIAlertController(title: "Успех", message: "Пост добавлен в избранное", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            if let parentVC = parentViewController {
-                parentVC.present(alert, animated: true, completion: nil)
+            // Увеличиваем количество лайков, если лайк еще не был поставлен
+            if !isLiked {
+                isLiked = true
+                post.likes += 1
+                postLikes.text = "like_count".localizedWithLikes(count: post.likes)
             }
         }
+
+        // Обновляем UI с сообщением
+        let alertTitle = isLiked ? "Успех" : "Удалено"
+        let alertMessage = isLiked ? "Пост добавлен в избранное" : "Пост удален из избранного"
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        parentViewController?.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -157,5 +165,21 @@ extension UIView {
             }
         }
         return nil
+    }
+}
+extension String {
+    // Метод для обычной локализации
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+
+    // Метод для локализации с числом для лайков
+    func localizedWithLikes(count: Int) -> String {
+        return String.localizedStringWithFormat(NSLocalizedString("like_count", tableName: "Localizable", comment: "Likes count"), count)
+    }
+
+    // Метод для локализации с числом для просмотров
+    func localizedWithViews(count: Int) -> String {
+        return String.localizedStringWithFormat(NSLocalizedString("views_count", tableName: "Localizable", comment: "Views count"), count)
     }
 }

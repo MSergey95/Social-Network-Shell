@@ -51,7 +51,7 @@ class CoreDataManager {
         }
 
         saveContext()
-    
+
         do {
             try context.save()
             print("Context saved successfully")
@@ -77,5 +77,21 @@ class CoreDataManager {
     func deleteFavoritePost(_ post: FavoritePost) {
         context.delete(post)
         saveContext()
+    }
+    // Удаление поста по названию
+    func removeFavoritePost(withTitle title: String) {
+        let fetchRequest: NSFetchRequest<FavoritePost> = FavoritePost.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "title == %@", title)
+
+        do {
+            let postsToDelete = try context.fetch(fetchRequest)
+            for post in postsToDelete {
+                context.delete(post)
+            }
+            saveContext()
+            print("Пост с названием '\(title)' удален из избранного")
+        } catch {
+            print("Ошибка при удалении поста: \(error)")
+        }
     }
 }

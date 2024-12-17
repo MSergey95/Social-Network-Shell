@@ -1,49 +1,64 @@
-import Foundation
 import UIKit
 
-// Протокол для всех координаторов, чтобы у них был метод `start`
-protocol Coordinator {
+// MARK: - Протокол координатора
+protocol Coordinator: AnyObject {
     func start()
 }
 
-// Главный координатор, который будет управлять всей навигацией
 final class AppCoordinator: Coordinator {
     var window: UIWindow
-    var tabBarController: UITabBarController
-    var profileCoordinator: ProfileCoordinator?
-    var feedCoordinator: FeedCoordinator?
-    var favoritesCoordinator: FavoritesCoordinator?  // Добавляем координатор для избранного
+    var loginCoordinator: LoginCoordinator?
 
+    // Инициализация
     init(window: UIWindow) {
         self.window = window
-        self.tabBarController = UITabBarController()
     }
 
+    // MARK: - Запуск приложения
     func start() {
-        // Инициализация UINavigationController для каждого модуля
-        let profileNC = UINavigationController()
-        let feedNC = UINavigationController()
-        let favoritesNC = UINavigationController()  // Навигейшн контроллер для избранного
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
 
-        // Инициализация дочерних координаторов
-        profileCoordinator = ProfileCoordinator(navigationController: profileNC)
-        feedCoordinator = FeedCoordinator(navigationController: feedNC)
-        favoritesCoordinator = FavoritesCoordinator(navigationController: favoritesNC)  // Инициализация координатора для избранного
+        if isLoggedIn {
+            showMainTabBar()
+        } else {
+            showLogin()
+        }
+    }
 
-        // Запуск дочерних координаторов
-        profileCoordinator?.start()
-        feedCoordinator?.start()
-        favoritesCoordinator?.start()  // Запуск FavoritesCoordinator
+    private func showLogin() {
+        loginCoordinator = LoginCoordinator(window: window)
+        loginCoordinator?.start()
 
-        // Настройка вкладок
-        profileNC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
-        feedNC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "text.bubble"), selectedImage: UIImage(systemName: "text.bubble.fill"))
-        favoritesNC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star.fill"))  // Настраиваем вкладку избранного
+        // Колбэк для успешного входа
+        loginCoordinator?.onLoginSuccess = { [weak self] in
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            self?.showMainTabBar()
+        }
+    }
+    private func showMainTabBar() {
+        let tabBarController = UITabBarController()
 
-        // Добавление контроллеров во вкладки
-        tabBarController.viewControllers = [profileNC, feedNC, favoritesNC]
+        let userProfile = UserProfile(name: "User", status: "active")
+        let profileViewModel = ProfileViewModel(userProfile: userProfile)
 
-        // Настройка окна
+        let feedVC = FeedViewController(profileViewModel: profileViewModel)
+        let favoritesVC = FavoritesViewController()
+
+        // Профиль через координатор
+        let profileNavController = UINavigationController()
+        let profileCoordinator = ProfileCoordinator(navigationController: profileNavController)
+        profileCoordinator.start()
+
+        feedVC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "list.bullet"), selectedImage: UIImage(systemName: "list.bullet"))
+        favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star.fill"))
+        profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
+
+        tabBarController.viewControllers = [
+            UINavigationController(rootViewController: feedVC),
+            UINavigationController(rootViewController: favoritesVC),
+            profileNavController
+        ]
+
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
     }

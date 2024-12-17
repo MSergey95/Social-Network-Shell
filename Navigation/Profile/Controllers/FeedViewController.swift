@@ -1,109 +1,79 @@
-//
-//  FeedViewController.swift
-//  Navigation
 import UIKit
 
-class FeedViewController: UIViewController {
+final class FeedViewController: UIViewController {
+    private var posts: [Post] = []
+    private let profileViewModel: ProfileViewModel
 
-    weak var coordinator: FeedCoordinator?
+    // Инициализация с данными профиля
+    init(profileViewModel: ProfileViewModel) {
+        self.profileViewModel = profileViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
 
-    private var feedModel: FeedModel!
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-    // MARK: - UI Elements
-
-    private let guessTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter your guess"
-        textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
+    // Таблица для отображения ленты
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        tableView.dataSource = self
+        return tableView
     }()
-
-    private lazy var checkGuessButton: CustomButton = {
-        let button = CustomButton(title: "Check Guess", titleColor: .white, backgroundColor: .systemBlue) {
-            self.checkGuessButtonPressed()
-        }
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    private let resultLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = .boldSystemFont(ofSize: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private lazy var showInfoButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Show Info", for: .normal)
-        button.addTarget(self, action: #selector(showInfo), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        feedModel = FeedModel(secretWord: "password") // Задаем секретное слово
-
-        setupUI()
+        view.backgroundColor = .systemBackground
+        setupTableView()
+        loadData()
     }
 
-    // MARK: - Setup UI
-
-    private func setupUI() {
-        view.addSubview(guessTextField)
-        view.addSubview(checkGuessButton)
-        view.addSubview(resultLabel)
-        view.addSubview(showInfoButton)
-
+    private func setupTableView() {
+        view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            guessTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            guessTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            guessTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            guessTextField.heightAnchor.constraint(equalToConstant: 40),
-
-            checkGuessButton.topAnchor.constraint(equalTo: guessTextField.bottomAnchor, constant: 20),
-            checkGuessButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            checkGuessButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            checkGuessButton.heightAnchor.constraint(equalToConstant: 50),
-
-            resultLabel.topAnchor.constraint(equalTo: checkGuessButton.bottomAnchor, constant: 20),
-            resultLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            resultLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            resultLabel.heightAnchor.constraint(equalToConstant: 40),
-
-            showInfoButton.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 20),
-            showInfoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 
-    // MARK: - Button Actions
-
-    private func checkGuessButtonPressed() {
-        guard let guess = guessTextField.text, !guess.isEmpty else {
-            resultLabel.text = "Please enter a guess"
-            resultLabel.textColor = .red
-            return
+    private func loadData() {
+        // Получаем пользовательские посты
+        for index in 0..<profileViewModel.getPostsCount() {
+            posts.append(profileViewModel.getPost(at: index))
         }
 
-        let isCorrect = feedModel.check(word: guess)
+        // Добавляем статичные "фейковые" посты
+        let otherPosts = [
+            Post(author: "Иван Иванов", description: "Какой красивый закат!", image: "Image1", likes: 23, views: 40),
+            Post(author: "Мария Смирнова", description: "Моё утро начинается с кофе ☕", image: "Image1", likes: 15, views: 22),
+            Post(author: "Петр Петров", description: "Велопрогулка по парку!", image: "Image1", likes: 30, views: 50)
+        ]
 
-        if isCorrect {
-            resultLabel.text = "Correct!"
-            resultLabel.textColor = .green
-        } else {
-            resultLabel.text = "Wrong!"
-            resultLabel.textColor = .red
-        }
+        posts.append(contentsOf: otherPosts)
+
+        // Перемешиваем все посты случайным образом
+        posts.shuffle()
+
+        // Обновляем таблицу
+        tableView.reloadData()
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension FeedViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return posts.count
     }
 
-    @objc private func showInfo() {
-        let infoVC = InfoViewController()
-        navigationController?.pushViewController(infoVC, animated: true)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configPostArray(post: posts[indexPath.row])
+        return cell
     }
 }
