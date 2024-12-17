@@ -28,27 +28,21 @@ The project follows the MVC (Model-View-Controller) design pattern:
 	•	View: User interface built using UIKit, including UITableView, UIStackView, and AutoLayout.
 	•	Controller: UIViewController manages UI logic and user interactions.
 
-Project Structure:
-
-Navigation/
-│
-├── Profile/
-│   ├── ProfileViewController.swift   # User profile screen
-│   ├── ProfileHeaderView.swift       # Custom table header view
-│   ├── PhotosTableViewCell.swift     # Table cell for the photo gallery
-│   └── PostTableViewCell.swift       # Table cell for posts
-│
-├── Feed/
-│   ├── FeedViewController.swift      # Feed screen
-│   └── PostModel.swift               # Post data model
-│
-├── Favorites/
-│   └── FavoritesViewController.swift # Favorites section screen
-│
-├── AppDelegate.swift                 # App configuration
-├── SceneDelegate.swift               # Scene setup and navigation
-└── Assets.xcassets                   # App assets (icons, images)
-
+Project Structure
+	•	Navigation
+	•	Profile/
+	•	ProfileViewController.swift – User profile screen
+	•	ProfileHeaderView.swift – Custom table header view
+	•	PhotosTableViewCell.swift – Table cell for the photo gallery
+	•	PostTableViewCell.swift – Table cell for posts
+	•	Feed/
+	•	FeedViewController.swift – Feed screen
+	•	PostModel.swift – Post data model
+	•	Favorites/
+	•	FavoritesViewController.swift – Favorites section screen
+	•	AppDelegate.swift – App configuration
+	•	SceneDelegate.swift – Scene setup and navigation
+	•	Assets.xcassets – App assets (icons, images)
 Interface Screenshots
 
 Profile Screen:
@@ -66,21 +60,13 @@ Technologies & Tools
 
 How to Run the Project
 	1.	Clone the repository:
-
 git clone https://github.com/your-repo/Navigation.git
-
-
 	2.	Open the project in Xcode.
 	3.	Select a simulator or connect a physical device.
 	4.	Run the project:
 
 Cmd + R
 
-Future Development Plans
-	•	Allow users to update their avatar and status.
-	•	Implement network interaction for loading data.
-	•	Add Dark Mode support.
-	•	Improve table performance using UICollectionView.
 
 Contact
 	•	Email: msergey95@gmail.com
