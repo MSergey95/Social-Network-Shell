@@ -149,7 +149,6 @@
 				3601A2A728490DDF000D261A /* AppDelegate.swift */,
 				A5C1BE572CD62D2B00311BB1 /* Localizable.stringsdict */,
 				A5C1BE5C2CD62F8C00311BB1 /* LocalizationHelper.swift */,
-				A5AE8C2D2CDA199E0094FF2B /* TESTS */,
 				A542F7FF2CD8603C0088FA74 /*  UIColor+ThemeColors.swift */,
 				A5C1BE542CD62CF000311BB1 /* Localizable.strings */,
 				A53F8BB62CC3B8C3005D2E7D /* CoreDataManager.swift */,
@@ -234,13 +233,6 @@
 				A570A34B2C6F19E80005B7BF /* UserProfile.swift */,
 			);
 			path = MVVM;
-			sourceTree = "<group>";
-		};
-		A5AE8C2D2CDA199E0094FF2B /* TESTS */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TESTS;
 			sourceTree = "<group>";
 		};
 		A5DF769C2C7DD9820023849D /* HTTP */ = {
