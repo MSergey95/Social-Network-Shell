@@ -26,18 +26,20 @@ Core Features
 	•	Responsive interface optimized for various devices.
 
 Project Architecture
-
 The project follows the MVC (Model-View-Controller) design pattern:
-	•	Model: Data models for users, posts, and photos.
-	•	View: User interface built using UIKit, including UITableView, UIStackView, and AutoLayout.
-	•	Controller: UIViewController manages UI logic and user interactions.
+
+Model: Data models for users, posts, and photos.
+View: User interface built using UIKit, including UITableView, UIStackView, and AutoLayout.
+Controller: UIViewController manages UI logic and user interactions.
+Additionally, Firebase Authentication is used for user login and registration, ensuring secure access to the application.
 
 Technologies & Tools
-	•	Swift: Programming language.
-	•	UIKit: UI framework for building the interface.
-	•	AutoLayout: Flexible UI constraints.
-	•	UINavigationController & UITabBarController: Navigation and tab management.
-	•	Xcode: Development environment.
+Swift – Programming language.
+UIKit – UI framework for building the interface.
+AutoLayout – Flexible UI constraints.
+UINavigationController & UITabBarController – Navigation and tab management.
+Firebase Authentication – User authentication and registration.
+Xcode – Development environment.
 
 How to Run the Project
 	1.	Clone the repository:
