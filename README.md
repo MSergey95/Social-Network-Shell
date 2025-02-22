@@ -45,6 +45,18 @@ Technologies & Tools
 - UINavigationController & UITabBarController – Navigation and tab management.
 - Firebase Authentication – User authentication and registration.
 - Xcode – Development environment.
+- CocoaPods – Dependency manager for integrating third-party libraries.
+
+---
+
+Dependencies (via CocoaPods)
+
+The project uses the following third-party dependencies managed via CocoaPods:
+
+- `Firebase/Auth` – Firebase Authentication for user login & registration.
+- `Firebase/Firestore` – Cloud Firestore for storing and syncing data.
+- `SDWebImage` – Efficient image caching and loading.
+
 
 
 How to Run the Project
